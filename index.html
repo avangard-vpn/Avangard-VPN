@@ -4,38 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- === SEO БЛОК (НАСТРОЙКИ ДЛЯ ПОИСКОВИКОВ И ТЕЛЕГРАМ) === -->
+    <!-- SEO -->
     <title>AVANGARD.VPN | Безопасный обход блокировок без потери скорости</title>
-    <meta name="description" content="Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI, обход блокировок и мгновенное соединение. Подключение через Telegram за 1 минуту.">
-    <meta name="keywords" content="vpn, купить vpn, vless, xtls reality, обход dpi, быстрый vpn, vpn для разработчиков">
+    <meta name="description" content="Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI, обход блокировок и мгновенное соединение.">
     
-    <!-- Open Graph (для красивых превью ссылок в Telegram и VK) -->
-    <meta property="og:title" content="AVANGARD.VPN | Свобода без ограничений">
-    <meta property="og:description" content="Надежный VPN на базе VLESS. Не блокируется провайдерами, скорость до 10 Гбит/с.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://avangard-vpn.vercel.app/"> <!-- Замените на ваш будущий домен -->
-    <!-- ======================================================= -->
-
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Подключение файла стилей (если вынесли CSS отдельно) -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
-
     <style>
-        /* ВСТАВЬТЕ СЮДА ВЕСЬ НАШ CSS ИЗ ПРОШЛОГО СООБЩЕНИЯ */
+        :root {
+            --bg-dark: #050505;
+            --accent-red: #FF0C0C;
+            --text-main: #FFFFFF;
+            --text-muted: #8E8E93;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --font-main: 'Manrope', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* === АБСТРАКТНЫЙ ФОН (Мягкое свечение без сетки) === */
+        .smooth-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+        }
+        
+        .smooth-bg::before {
+            content: ''; position: absolute;
+            bottom: -20%; left: 10%; width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 60%);
+            border-radius: 50%; filter: blur(100px);
+        }
+
+        .smooth-bg::after {
+            content: ''; position: absolute;
+            top: -10%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.12) 0%, transparent 60%);
+            border-radius: 50%; filter: blur(100px);
+        }
+
+        /* === ШАПКА === */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 60px; position: relative; z-index: 10;
+        }
+        .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
+        .nav-pill { display: flex; gap: 32px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50px; padding: 12px 32px; backdrop-filter: blur(12px); }
+        .nav-pill a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
+        .nav-pill a:hover, .nav-pill a.active { color: var(--text-main); }
+        .btn-outline { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); text-decoration: none; padding: 12px 24px; border-radius: 50px; font-size: 14px; backdrop-filter: blur(12px); transition: 0.3s; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.08); }
+
+        /* === БЛОК 1: HERO === */
+        .hero-section {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 80px 20px; z-index: 10; position: relative;
+        }
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255, 12, 12, 0.05); border: 1px solid rgba(255, 12, 12, 0.3);
+            padding: 8px 16px; border-radius: 50px; font-family: var(--font-mono);
+            font-size: 11px; letter-spacing: 2px; color: var(--text-main); margin-bottom: 32px;
+        }
+        h1 { font-size: 64px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+        h1 .text-red { color: var(--accent-red); }
+        .subtitle { font-size: 16px; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 48px; }
+        .btn-primary {
+            background: var(--accent-red); color: white; text-decoration: none;
+            padding: 18px 40px; border-radius: 50px; font-size: 16px; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 12px;
+            box-shadow: 0 0 40px rgba(255, 12, 12, 0.4); transition: 0.3s;
+        }
+        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 12, 12, 0.6); }
+
+        /* === БЛОК 2: ПРЕИМУЩЕСТВА === */
+        .features-section { width: 100%; max-width: 1200px; margin: 40px auto; overflow: hidden; position: relative; z-index: 10; }
+        .bento-slider { display: flex; gap: 24px; padding: 20px 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .bento-slider::-webkit-scrollbar { display: none; }
+        .card {
+            flex: 0 0 calc(33.333% - 16px); min-width: 300px; scroll-snap-align: center;
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 32px; position: relative; transition: 0.3s; backdrop-filter: blur(10px);
+        }
+        .card:hover { border-color: rgba(255, 12, 12, 0.3); transform: translateY(-5px); }
+        .card-label { display: flex; align-items: center; gap: 8px; color: var(--accent-red); font-family: var(--font-mono); font-size: 11px; margin-bottom: 20px; }
+        .card h3 { font-size: 20px; margin-bottom: 12px; }
+        .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        /* === БЛОК 3: ИНСТРУКЦИЯ (АККОРДЕОН) === */
+        .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0 40px; position: relative; z-index: 10; }
+        .accordion-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px; }
+        .accordion-container {
+            display: flex; height: 400px; width: 100%; gap: 0;
+            border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border);
+        }
+        .accordion-container input[type="radio"] { display: none; }
+        .acc-tab {
+            flex: 1; position: relative; cursor: pointer; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
+            background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px);
+            border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; padding: 32px 24px; overflow: hidden;
+        }
+        .acc-tab:last-child { border-right: none; }
+        .acc-tab::before {
+            content: ''; position: absolute; bottom: -50%; left: -50%; width: 200%; height: 100%;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 60%);
+            pointer-events: none; opacity: 0.5; transition: 0.3s;
+        }
+        .acc-tab:hover::before { opacity: 1; }
+        input[type="radio"]:checked + label { flex: 4; background: #FFFFFF; color: #000000; cursor: default; }
+        input[type="radio"]:checked + label::before { display: none; }
+        .step-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; transition: 0.3s;}
+        .step-title { font-size: 24px; font-weight: 800; white-space: nowrap; transition: 0.3s;}
+        input[type="radio"]:checked + label .step-num { color: var(--accent-red); }
+        input[type="radio"]:checked + label .step-title { color: #000000; }
+        .acc-content { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s; margin-top: 24px; pointer-events: none; width: 350px; }
+        .acc-content p { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 16px; }
+        .acc-content ul { list-style: none; padding-left: 0; }
+        .acc-content ul li { font-size: 14px; color: #222; margin-bottom: 12px; padding-left: 20px; position: relative; font-weight: 500;}
+        .acc-content ul li::before { content: ''; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; background: var(--accent-red); border-radius: 50%; }
+        input[type="radio"]:checked + label .acc-content { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .acc-footer { position: absolute; bottom: 32px; left: 24px; right: 24px; border-top: 1px solid #E5E5E5; padding-top: 16px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #888; opacity: 0; transition: opacity 0.3s ease 0.2s; }
+        .acc-footer span.dark { color: #000; }
+        input[type="radio"]:checked + label .acc-footer { opacity: 1; }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 1024px) {
+            h1 { font-size: 40px; }
+            header { flex-direction: column; gap: 20px; padding: 20px; }
+            .nav-pill { display: none; }
+            .accordion-container { flex-direction: column; height: auto; }
+            .acc-tab { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 20px; }
+            input[type="radio"]:checked + label { flex: none; height: auto; padding-bottom: 80px;}
+            .acc-content { width: 100%; }
+        }
     </style>
 </head>
 <body>
-    <div class="minimal-bg"></div>
 
-    <!-- ШАПКА: Поисковик понимает, что тут навигация сайта -->
+    <!-- Размытые красные пятна на фоне -->
+    <div class="smooth-bg"></div>
+
     <header>
         <div class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></div>
-        
-        <!-- Тег nav специально для SEO-навигации -->
         <nav class="nav-pill">
             <a href="#hero" class="active">Главная</a>
             <a href="#features">Преимущества</a>
@@ -44,11 +171,7 @@
         <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
 
-    <!-- MAIN: Главный контейнер для контента. Поисковик индексирует именно его -->
     <main>
-        
-        <!-- СЕКЦИЯ 1: Главный экран -->
-        <!-- У страницы должен быть только ОДИН тег H1. Это главное правило SEO -->
         <section id="hero" class="hero-section">
             <div class="badge">SECURE TUNNEL ACTIVE</div>
             <h1>Свобода без ограничений.<br><span class="text-red">Безопасность без следов.</span></h1>
@@ -56,26 +179,19 @@
             <a href="#" class="btn-primary">Подключить через Telegram</a>
         </section>
 
-        <!-- СЕКЦИЯ 2: Преимущества -->
-        <!-- Поисковик видит тег section и понимает, что это отдельный смысловой блок -->
         <section id="features" class="features-section">
-            <!-- Скрытый заголовок H2 для структуры SEO (если визуально он не нужен, можно скрыть через CSS) -->
             <h2 style="display: none;">Технические преимущества AVANGARD.VPN</h2>
-            
             <div class="bento-slider">
-                <!-- Карточки преимуществ с заголовками H3 -->
                 <article class="card">
                     <div class="card-label">PROTOCOL</div>
                     <h3>VLESS + XTLS</h3>
                     <p>Самый современный протокол связи. Работает быстро, стабильно и без задержек.</p>
                 </article>
-                
                 <article class="card">
                     <div class="card-label">CAMOUFLAGE</div>
                     <h3>Reality (Anti-DPI)</h3>
                     <p>Прячет трафик под видом обычных сайтов из «белых списков» провайдера.</p>
                 </article>
-                
                 <article class="card">
                     <div class="card-label">BANDWIDTH</div>
                     <h3>До 10 Гбит/с</h3>
@@ -84,24 +200,60 @@
             </div>
         </section>
 
-        <!-- СЕКЦИЯ 3: Инструкция -->
         <section id="guide" class="accordion-section">
             <h2 class="accordion-title">Как начать пользоваться</h2>
-            
             <div class="accordion-container">
-                <!-- Код аккордеона из прошлого сообщения -->
-                <!-- Внутри вкладок можно использовать тег <article> для каждого шага -->
+                <input type="radio" name="acc" id="tab1" checked>
+                <label for="tab1" class="acc-tab">
+                    <div class="step-num">ШАГ 1</div>
+                    <div class="step-title">Telegram Бот</div>
+                    <div class="acc-content">
+                        <p>Откройте нашего официального бота. Вся настройка и управление подпиской происходит прямо там, без лишних сайтов.</p>
+                        <ul><li>Нажмите кнопку /start</li><li>Выберите удобный тариф</li><li>Оплатите подписку картой</li></ul>
+                    </div>
+                    <div class="acc-footer"><span>ВРЕМЯ НА ШАГ</span> <span class="dark">Меньше 1 минуты</span></div>
+                </label>
+
+                <input type="radio" name="acc" id="tab2">
+                <label for="tab2" class="acc-tab">
+                    <div class="step-num">ШАГ 2</div>
+                    <div class="step-title">Получение ключа</div>
+                    <div class="acc-content">
+                        <p>Сразу после оплаты бот автоматически сгенерирует ваш уникальный ключ доступа (ссылку).</p>
+                        <ul><li>Скопируйте полученную ссылку</li><li>Ключ привязан только к вашему аккаунту</li></ul>
+                    </div>
+                    <div class="acc-footer"><span>ВРЕМЯ НА ШАГ</span> <span class="dark">Мгновенно</span></div>
+                </label>
+
+                <input type="radio" name="acc" id="tab3">
+                <label for="tab3" class="acc-tab">
+                    <div class="step-num">ШАГ 3</div>
+                    <div class="step-title">Установка приложения</div>
+                    <div class="acc-content">
+                        <p>Скачайте клиентское приложение. Мы рекомендуем Karing или v2rayNG для лучшей скорости.</p>
+                        <ul><li>Доступно для iOS (App Store)</li><li>Доступно для Android (Google Play)</li><li>Версии для Windows и macOS</li></ul>
+                    </div>
+                    <div class="acc-footer"><span>ПЛАТФОРМЫ</span> <span class="dark">Все устройства</span></div>
+                </label>
+
+                <input type="radio" name="acc" id="tab4">
+                <label for="tab4" class="acc-tab">
+                    <div class="step-num">ШАГ 4</div>
+                    <div class="step-title">Подключение</div>
+                    <div class="acc-content">
+                        <p>Откройте скачанное приложение, вставьте ваш ключ и нажмите кнопку подключения.</p>
+                        <ul><li>Трафик зашифрован</li><li>Ограничения сняты</li></ul>
+                    </div>
+                    <div class="acc-footer"><span>СТАТУС</span> <span class="dark">Готово к работе</span></div>
+                </label>
             </div>
         </section>
-
     </main>
 
-    <!-- ФУТЕР: Подвал сайта с копирайтом (тоже важно для SEO) -->
     <footer>
         <div style="text-align: center; padding: 40px; color: #555; font-size: 12px;">
             &copy; 2026 AVANGARD.VPN. Все права защищены.
         </div>
     </footer>
-
 </body>
 </html>
