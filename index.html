@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO -->
+    <!-- SEO Блок -->
     <title>AVANGARD.VPN | Безопасный обход блокировок без потери скорости</title>
     <meta name="description" content="Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI, обход блокировок и мгновенное соединение.">
     
@@ -15,7 +15,7 @@
     
     <style>
         :root {
-            --bg-dark: #050505;
+            --bg-dark: #030303;
             --accent-red: #FF0C0C;
             --text-main: #FFFFFF;
             --text-muted: #8E8E93;
@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        /* === АБСТРАКТНЫЙ ФОН (Мягкое свечение без сетки) === */
+        /* === УЛУЧШЕННЫЙ АБСТРАКТНЫЙ ФОН === */
         .smooth-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -44,24 +44,34 @@
             overflow: hidden;
         }
         
+        /* Центральное глубокое свечение */
         .smooth-bg::before {
             content: ''; position: absolute;
-            bottom: -20%; left: 10%; width: 70vw; height: 70vw;
-            background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 60%);
-            border-radius: 50%; filter: blur(100px);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh;
+            background: radial-gradient(ellipse, rgba(180, 10, 10, 0.12) 0%, transparent 60%);
+            filter: blur(80px); pointer-events: none;
         }
 
+        /* Боковые акцентные пятна */
         .smooth-bg::after {
             content: ''; position: absolute;
-            top: -10%; right: -10%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(255, 12, 12, 0.12) 0%, transparent 60%);
-            border-radius: 50%; filter: blur(100px);
+            bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.08) 0%, transparent 60%);
+            border-radius: 50%; filter: blur(100px); pointer-events: none;
+        }
+
+        .smooth-bg-extra {
+            position: absolute;
+            top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.05) 0%, transparent 60%);
+            border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: -1;
         }
 
         /* === ШАПКА === */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 24px 60px; position: relative; z-index: 10;
+            padding: 24px 60px; max-width: 1400px; margin: 0 auto; position: relative; z-index: 10;
         }
         .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
         .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
@@ -74,7 +84,7 @@
         /* === БЛОК 1: HERO === */
         .hero-section {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 80px 20px; z-index: 10; position: relative;
+            text-align: center; padding: 100px 20px 80px 20px; z-index: 10; position: relative;
         }
         .badge {
             display: inline-flex; align-items: center; gap: 8px;
@@ -94,14 +104,21 @@
         .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 12, 12, 0.6); }
 
         /* === БЛОК 2: ПРЕИМУЩЕСТВА === */
-        .features-section { width: 100%; max-width: 1200px; margin: 40px auto; overflow: hidden; position: relative; z-index: 10; }
-        .bento-slider { display: flex; gap: 24px; padding: 20px 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .features-section { 
+            width: 100%; max-width: 1120px; margin: 0 auto 40px auto; 
+            padding: 0; position: relative; z-index: 10; 
+        }
+        .bento-slider { 
+            display: flex; gap: 24px; padding: 20px 0; /* Убрали боковые отступы для идеального выравнивания */
+            overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; 
+        }
         .bento-slider::-webkit-scrollbar { display: none; }
         .card {
-            flex: 0 0 calc(33.333% - 16px); min-width: 300px; scroll-snap-align: center;
+            flex: 1; min-width: 300px; scroll-snap-align: center;
             background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
             border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 32px; position: relative; transition: 0.3s; backdrop-filter: blur(10px);
+            display: flex; flex-direction: column;
         }
         .card:hover { border-color: rgba(255, 12, 12, 0.3); transform: translateY(-5px); }
         .card-label { display: flex; align-items: center; gap: 8px; color: var(--accent-red); font-family: var(--font-mono); font-size: 11px; margin-bottom: 20px; }
@@ -109,15 +126,16 @@
         .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
         /* === БЛОК 3: ИНСТРУКЦИЯ (АККОРДЕОН) === */
-        .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0 40px; position: relative; z-index: 10; }
+        .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0; position: relative; z-index: 10; }
         .accordion-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px; }
         .accordion-container {
-            display: flex; height: 400px; width: 100%; gap: 0;
+            display: flex; height: 420px; width: 100%; gap: 0;
             border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border);
         }
         .accordion-container input[type="radio"] { display: none; }
         .acc-tab {
-            flex: 1; position: relative; cursor: pointer; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
+            flex: 1.2; /* Чуть увеличили базовую ширину закрытых вкладок */
+            position: relative; cursor: pointer; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
             background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px);
             border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; padding: 32px 24px; overflow: hidden;
         }
@@ -130,16 +148,22 @@
         .acc-tab:hover::before { opacity: 1; }
         input[type="radio"]:checked + label { flex: 4; background: #FFFFFF; color: #000000; cursor: default; }
         input[type="radio"]:checked + label::before { display: none; }
+        
         .step-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; transition: 0.3s;}
-        .step-title { font-size: 24px; font-weight: 800; white-space: nowrap; transition: 0.3s;}
+        
+        /* Исправление текста: убрали nowrap, добавили line-height */
+        .step-title { font-size: 18px; font-weight: 800; transition: 0.3s; line-height: 1.3;}
+        
         input[type="radio"]:checked + label .step-num { color: var(--accent-red); }
-        input[type="radio"]:checked + label .step-title { color: #000000; }
-        .acc-content { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s; margin-top: 24px; pointer-events: none; width: 350px; }
+        input[type="radio"]:checked + label .step-title { color: #000000; font-size: 24px; }
+        
+        .acc-content { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s; margin-top: 24px; pointer-events: none; min-width: 280px; max-width: 350px;}
         .acc-content p { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 16px; }
         .acc-content ul { list-style: none; padding-left: 0; }
         .acc-content ul li { font-size: 14px; color: #222; margin-bottom: 12px; padding-left: 20px; position: relative; font-weight: 500;}
         .acc-content ul li::before { content: ''; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; background: var(--accent-red); border-radius: 50%; }
         input[type="radio"]:checked + label .acc-content { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        
         .acc-footer { position: absolute; bottom: 32px; left: 24px; right: 24px; border-top: 1px solid #E5E5E5; padding-top: 16px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #888; opacity: 0; transition: opacity 0.3s ease 0.2s; }
         .acc-footer span.dark { color: #000; }
         input[type="radio"]:checked + label .acc-footer { opacity: 1; }
@@ -149,17 +173,18 @@
             h1 { font-size: 40px; }
             header { flex-direction: column; gap: 20px; padding: 20px; }
             .nav-pill { display: none; }
+            .features-section, .accordion-section { padding: 0 20px; }
             .accordion-container { flex-direction: column; height: auto; }
             .acc-tab { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 20px; }
             input[type="radio"]:checked + label { flex: none; height: auto; padding-bottom: 80px;}
-            .acc-content { width: 100%; }
+            .acc-content { width: 100%; min-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Размытые красные пятна на фоне -->
     <div class="smooth-bg"></div>
+    <div class="smooth-bg-extra"></div>
 
     <header>
         <div class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></div>
@@ -176,24 +201,43 @@
             <div class="badge">SECURE TUNNEL ACTIVE</div>
             <h1>Свобода без ограничений.<br><span class="text-red">Безопасность без следов.</span></h1>
             <p class="subtitle">Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI и мгновенное соединение по всему миру.</p>
-            <a href="#" class="btn-primary">Подключить через Telegram</a>
+            <a href="#" class="btn-primary">
+                <!-- Вернули иконку Telegram -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                Подключить через Telegram
+            </a>
         </section>
 
         <section id="features" class="features-section">
             <h2 style="display: none;">Технические преимущества AVANGARD.VPN</h2>
             <div class="bento-slider">
                 <article class="card">
-                    <div class="card-label">PROTOCOL</div>
+                    <div class="card-label">
+                        <!-- Иконка Терминала -->
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                        PROTOCOL
+                    </div>
                     <h3>VLESS + XTLS</h3>
                     <p>Самый современный протокол связи. Работает быстро, стабильно и без задержек.</p>
                 </article>
                 <article class="card">
-                    <div class="card-label">CAMOUFLAGE</div>
+                    <div class="card-label">
+                        <!-- Иконка Щита -->
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        CAMOUFLAGE
+                    </div>
                     <h3>Reality (Anti-DPI)</h3>
                     <p>Прячет трафик под видом обычных сайтов из «белых списков» провайдера.</p>
                 </article>
                 <article class="card">
-                    <div class="card-label">BANDWIDTH</div>
+                    <div class="card-label">
+                        <!-- Иконка Пульса/Скорости -->
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        BANDWIDTH
+                    </div>
                     <h3>До 10 Гбит/с</h3>
                     <p>Мощные серверы с широкими каналами. Хватит для 4K-видео и тяжелых игр.</p>
                 </article>
