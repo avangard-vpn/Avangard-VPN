@@ -3,476 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVANGARD.VPN | Обход блокировок</title>
-    <!-- Подключаем шрифты -->
+    <title>AVANGARD.VPN | Свобода без ограничений</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --accent-red: #ff0c0c;
-            --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --font-sans: 'Inter', sans-serif;
+            --bg-dark: #030000;
+            --accent-red: #FF0C0C;
+            --text-main: #FFFFFF;
+            --text-muted: #8E8E93;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --font-main: 'Manrope', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: var(--font-sans);
+            font-family: var(--font-main);
             min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            position: relative;
         }
 
-        /* --- Header (Навигация) --- */
+        /* Фоновые эффекты */
+        .bg-rays {
+            position: absolute;
+            top: 20%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200vw; height: 200vw;
+            background: repeating-conic-gradient(
+                from 0deg, transparent 0deg, transparent 4deg, 
+                rgba(255, 12, 12, 0.15) 4.5deg, transparent 5deg
+            );
+            mask-image: radial-gradient(circle at center, black 10%, transparent 60%);
+            -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 40%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-glow {
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh;
+            background: radial-gradient(ellipse, rgba(255, 12, 12, 0.15) 0%, transparent 60%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-grid {
+            position: absolute;
+            bottom: -10%; left: -50%;
+            width: 200%; height: 60vh;
+            background-image: 
+                linear-gradient(to right, rgba(255, 12, 12, 0.15) 1px, transparent 1px),
+                linear-gradient(to top, rgba(255, 12, 12, 0.15) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(500px) rotateX(75deg);
+            transform-origin: top;
+            mask-image: linear-gradient(to bottom, transparent, black 80%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 80%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Шапка */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 24px 60px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(13, 13, 13, 0.8);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: relative;
+            z-index: 10;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 16px;
+            font-size: 18px; font-weight: 800; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 10px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-red);
-        }
-
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #10b981;
-        }
-        
-        .ping-value { color: #10b981; }
-
-        .version-tag {
-            border: 1px solid var(--glass-border);
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            flex: 1;
-            padding: 60px;
-            max-width: 1440px;
-            margin: 0 auto;
-            width: 100%;
-            gap: 40px;
-        }
-
-        /* Левая колонка */
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .tags {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        .tag {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 6px 12px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .tag-dot {
-            width: 6px;
-            height: 6px;
+        .logo-dot {
+            width: 10px; height: 10px;
             background-color: var(--accent-red);
             border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+
+        .logo .text-red { color: var(--accent-red); }
+
+        .nav-pill {
+            display: flex; gap: 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 12px 32px;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-pill a {
+            color: var(--text-muted);
+            text-decoration: none; font-size: 14px; font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-pill a.active, .nav-pill a:hover { color: var(--text-main); }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 12px 24px; border-radius: 50px;
+            font-size: 14px; backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+        
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.08); }
+
+        /* Главный экран */
+        main {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 0 20px;
+            margin-top: 60px; z-index: 10;
+        }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 12, 12, 0.3);
+            padding: 8px 16px; border-radius: 50px;
+            font-family: var(--font-mono); font-size: 11px;
+            letter-spacing: 2px; color: var(--text-main);
+            margin-bottom: 32px; backdrop-filter: blur(4px);
         }
 
         h1 {
-            font-size: 56px;
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
+            font-size: 64px; font-weight: 800; line-height: 1.1;
+            margin-bottom: 24px; letter-spacing: -1px;
         }
 
-        h1 .red-text {
-            color: var(--accent-red);
+        h1 .text-red { color: var(--accent-red); }
+
+        .subtitle {
+            font-size: 16px; color: var(--text-muted);
+            max-width: 600px; line-height: 1.6; margin-bottom: 48px;
         }
 
-        .description {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 500px;
+        .btn-primary {
+            background: var(--accent-red); color: white;
+            text-decoration: none; padding: 18px 40px;
+            border-radius: 50px; font-size: 16px; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 12px;
+            box-shadow: 0 0 40px rgba(255, 12, 12, 0.5);
+            transition: 0.3s;
         }
 
-        .cta-button {
-            background: var(--accent-red);
-            color: white;
-            border: none;
-            padding: 18px 36px;
-            border-radius: 100px;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: var(--font-sans);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 32px rgba(255, 12, 12, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-bottom: 16px;
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(255, 12, 12, 0.7);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(255, 12, 12, 0.6);
-        }
-
-        .microtext {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 48px;
-        }
-
-        .bento-info {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 24px 32px;
+        /* --- СЛАЙДЕР ПРЕИМУЩЕСТВ --- */
+        .slider-container {
             width: 100%;
-            max-width: 580px;
+            max-width: 1200px;
+            margin: 80px auto 40px auto;
+            overflow: hidden; /* Прячем все, что выходит за пределы */
+            z-index: 10;
         }
 
-        .info-col {
+        .bento-slider {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            gap: 24px;
+            padding: 20px 40px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Прячем скроллбар в Firefox */
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .bento-slider::-webkit-scrollbar {
+            display: none; /* Прячем скроллбар в Chrome/Safari */
         }
 
-        .info-label {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-value {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        /* Правая колонка (Графика на CSS) */
-        .hero-visual {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-position: center;
-        }
-
-        /* Осевые линии сетки */
-        .hero-visual::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        }
-        .hero-visual::after {
-            content: '';
-            position: absolute;
-            height: 100%;
-            width: 1px;
-            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent);
-        }
-
-        .visual-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Красное свечение */
-        .glow {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            background: var(--accent-red);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            transform: translate(20px, 20px);
-        }
-
-        /* Большой стеклянный фон */
-        .glass-card-lg {
-            position: absolute;
-            width: 320px;
-            height: 220px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
+        .card {
+            flex: 0 0 calc(33.333% - 16px);
+            min-width: 300px; /* Минимальная ширина карточки на телефонах */
+            scroll-snap-align: center;
+            background: linear-gradient(145deg, rgba(30, 0, 0, 0.4) 0%, rgba(10, 10, 10, 0.6) 100%);
+            border: 1px solid rgba(255, 12, 12, 0.15);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: left;
             backdrop-filter: blur(10px);
-            transform: rotate(-15deg);
-            z-index: 2;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
         }
 
-        /* Малый стеклянный квадрат */
-        .glass-card-sm {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 16px;
-            backdrop-filter: blur(16px);
-            transform: rotate(5deg) translate(-40px, -20px);
-            z-index: 3;
+        .card:hover {
+            border-color: rgba(255, 12, 12, 0.4);
+            transform: translateY(-5px);
         }
 
-        /* Стеклянный круг */
-        .glass-circle {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50%;
-            backdrop-filter: blur(12px);
-            transform: translate(60px, 20px);
-            z-index: 1;
+        .card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        /* Красный треугольник (через clip-path) */
-        .accent-triangle {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 12, 12, 0.4);
-            border: 1px solid rgba(255, 12, 12, 0.8);
-            backdrop-filter: blur(8px);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            transform: rotate(115deg) translate(20px, -80px);
-            z-index: 4;
+        .card-label {
+            display: flex; align-items: center; gap: 8px;
+            color: var(--accent-red); font-family: var(--font-mono);
+            font-size: 11px; letter-spacing: 1px; margin-bottom: 20px;
         }
 
-        /* Технические лейблы на графике */
-        .visual-label {
-            position: absolute;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 4px 8px;
-            border: 1px solid var(--glass-border);
-            border-radius: 4px;
-            background: rgba(13, 13, 13, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 5;
+        .card h3 {
+            font-size: 20px; font-weight: 800; margin-bottom: 12px;
         }
 
-        .label-top {
-            top: 20px;
-            left: 10px;
-            color: var(--text-muted);
+        .card p {
+            font-size: 14px; color: var(--text-muted); line-height: 1.6;
         }
 
-        .label-bottom {
-            bottom: 20px;
-            right: 0;
-            color: var(--accent-red);
-            border-color: rgba(255, 12, 12, 0.3);
-        }
-
-        /* Адаптив для маленьких экранов */
+        /* Адаптив */
         @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 40px;
-            }
-            .hero-visual {
-                min-height: 400px;
-                margin-top: 40px;
-            }
-            header {
-                flex-wrap: wrap;
-                gap: 20px;
-                padding: 20px;
-            }
-            .nav-links {
-                display: none; /* Скрываем на мобилках для простоты MVP */
-            }
+            h1 { font-size: 48px; }
+            header { flex-direction: column; gap: 20px; }
+            .nav-pill { display: none; }
+            
+            /* Настройки слайдера для мобильных */
+            .bento-slider { padding: 20px; }
+            .card { flex: 0 0 85%; } /* Карточка занимает 85% ширины экрана, чтобы было видно край следующей */
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-rays"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
     <header>
         <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" rx="6" fill="#FF0C0C"/>
-                <path d="M12 6L18 18H15L12 11.5L9 18H6L12 6Z" fill="white"/>
-            </svg>
-            AVANGARD . VPN
+            <div class="logo-dot"></div>
+            AVANGARD.<span class="text-red">VPN</span>
         </div>
         
-        <nav class="nav-links">
-            <a href="#">Главная</a>
-            <a href="#">Преимущества</a>
-            <a href="#">Тариф</a>
-            <a href="#">Как подключится</a>
+        <nav class="nav-pill">
+            <a href="#" class="active">Главная</a>
+            <a href="#">Тарифы</a>
+            <a href="#">О нас</a>
+            <a href="#">Подключение</a>
         </nav>
 
-        <div class="system-status">
-            <div class="status-item">
-                <div class="dot"></div>
-                Сеть стабильна: 99.9%
-            </div>
-            <div class="status-item">
-                Ping: <span class="ping-value">14 ms</span>
-            </div>
-            <div class="version-tag">v1.2.0-stable</div>
-        </div>
+        <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
 
-    <main class="hero">
-        <div class="hero-content">
-            <div class="tags">
-                <div class="tag"><div class="tag-dot"></div> VLESS</div>
-                <div class="tag">Anti-DPI Bypass</div>
-            </div>
-
-            <h1>Обход блокировок,<br>который <span class="red-text">не ломается.</span></h1>
-            
-            <p class="description">AVANGARD.VPN. Работает на базе протокола VLESS с защитой от DPI-анализатора. Чистый интернет для разработки, рабочих созвонов и деплоя без скачков пинга.</p>
-            
-            <button class="cta-button">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Подключить через Telegram
-            </button>
-            
-            <div class="microtext">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                250 ₽/мес. Настройка за 1 минуту через Telegram.
-            </div>
-
-            <div class="bento-info">
-                <div class="info-col">
-                    <span class="info-label">Протокол</span>
-                    <span class="info-value">VLESS + XTLS</span>
-                </div>
-                <div class="info-col">
-                    <span class="info-label">Маскировка</span>
-                    <span class="info-value">Reality (DPI)</span>
-                </div>
-                <div class="info-col">
-                    <span class="info-label">Скорость</span>
-                    <span class="info-value">до 10 Gbps</span>
-                </div>
-            </div>
+    <main>
+        <div class="badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF0C0C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            SECURE TUNNEL ACTIVE
         </div>
 
-        <div class="hero-visual">
-            <div class="visual-container">
-                <div class="glow"></div>
-                <div class="glass-card-lg"></div>
-                <div class="glass-circle"></div>
-                <div class="glass-card-sm"></div>
-                <div class="accent-triangle"></div>
-                
-                <div class="visual-label label-top">SECURE_TUNNEL: TRUE</div>
-                <div class="visual-label label-bottom">DPI_PROTECTED</div>
-            </div>
-        </div>
+        <h1>Свобода без<br>ограничений.<br><span class="text-red">Безопасность без следов.</span></h1>
+        
+        <p class="subtitle">Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI и мгновенное соединение по всему миру.</p>
+        
+        <a href="#" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            Подключить через Telegram
+        </a>
     </main>
+
+    <!-- Слайдер контейнер -->
+    <section class="slider-container">
+        <div class="bento-slider">
+            <div class="card">
+                <div class="card-label">
+                    <span>&gt;_</span> PROTOCOL
+                </div>
+                <h3>VLESS + XTLS</h3>
+                <p>Самый современный протокол связи. Работает быстро, стабильно и без задержек.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    CAMOUFLAGE
+                </div>
+                <h3>Reality (Anti-DPI)</h3>
+                <p>Прячет ваш VPN-трафик под видом обычных сайтов из «белых списков» провайдера. Умные блокировки вас просто не видят.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    BANDWIDTH
+                </div>
+                <h3>Скорость до 10 Гбит/с</h3>
+                <p>Мощные серверы с широкими каналами. Хватит для 4K-видео, рабочих созвонов и тяжелых игр без тормозов.</p>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
