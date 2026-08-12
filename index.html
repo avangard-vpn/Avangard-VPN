@@ -3,54 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVANGARD.VPN | Скоро запуск</title>
+    <title>AVANGARD.VPN | Обход блокировок</title>
+    <!-- Подключаем шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Базовые настройки страницы */
-        body {
+        :root {
+            --bg-color: #0d0d0d;
+            --accent-red: #ff0c0c;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            height: 100vh;
-            background-color: #121212;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Header (Навигация) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+        }
+        
+        .ping-value { color: #10b981; }
+
+        .version-tag {
+            border: 1px solid var(--glass-border);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            flex: 1;
+            padding: 60px;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 40px;
+        }
+
+        /* Левая колонка */
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .tags {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+
+        .tag {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 6px 12px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tag-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 56px;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        h1 .red-text {
+            color: var(--accent-red);
+        }
+
+        .description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(255, 12, 12, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 12, 12, 0.6);
+        }
+
+        .microtext {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 48px;
+        }
+
+        .bento-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 32px;
+            width: 100%;
+            max-width: 580px;
+        }
+
+        .info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Правая колонка (Графика на CSS) */
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+        }
+
+        /* Осевые линии сетки */
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .visual-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Та самая стеклянная панель */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        /* Красное свечение */
+        .glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            transform: translate(20px, 20px);
+        }
+
+        /* Большой стеклянный фон */
+        .glass-card-lg {
+            position: absolute;
+            width: 320px;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 24px;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            max-width: 400px;
+            backdrop-filter: blur(10px);
+            transform: rotate(-15deg);
+            z-index: 2;
         }
 
-        /* Акцентный заголовок */
-        h1 {
-            color: #FF2400;
-            margin-top: 0;
-            font-size: 28px;
-            letter-spacing: 1px;
+        /* Малый стеклянный квадрат */
+        .glass-card-sm {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(16px);
+            transform: rotate(5deg) translate(-40px, -20px);
+            z-index: 3;
         }
 
-        p {
-            color: #a0a0a0;
-            line-height: 1.6;
-            margin-bottom: 0;
+        /* Стеклянный круг */
+        .glass-circle {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            backdrop-filter: blur(12px);
+            transform: translate(60px, 20px);
+            z-index: 1;
+        }
+
+        /* Красный треугольник (через clip-path) */
+        .accent-triangle {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 12, 12, 0.4);
+            border: 1px solid rgba(255, 12, 12, 0.8);
+            backdrop-filter: blur(8px);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: rotate(115deg) translate(20px, -80px);
+            z-index: 4;
+        }
+
+        /* Технические лейблы на графике */
+        .visual-label {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            padding: 4px 8px;
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            background: rgba(13, 13, 13, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 5;
+        }
+
+        .label-top {
+            top: 20px;
+            left: 10px;
+            color: var(--text-muted);
+        }
+
+        .label-bottom {
+            bottom: 20px;
+            right: 0;
+            color: var(--accent-red);
+            border-color: rgba(255, 12, 12, 0.3);
+        }
+
+        /* Адаптив для маленьких экранов */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 40px;
+            }
+            .hero-visual {
+                min-height: 400px;
+                margin-top: 40px;
+            }
+            header {
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+            }
+            .nav-links {
+                display: none; /* Скрываем на мобилках для простоты MVP */
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-panel">
-        <h1>AVANGARD.VPN</h1>
-        <p>Инфраструктура инициализирована. Здесь будет интерфейс управления защищенными соединениями.</p>
-    </div>
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="6" fill="#FF0C0C"/>
+                <path d="M12 6L18 18H15L12 11.5L9 18H6L12 6Z" fill="white"/>
+            </svg>
+            AVANGARD . VPN
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#">Главная</a>
+            <a href="#">Преимущества</a>
+            <a href="#">Тариф</a>
+            <a href="#">Как подключится</a>
+        </nav>
+
+        <div class="system-status">
+            <div class="status-item">
+                <div class="dot"></div>
+                Сеть стабильна: 99.9%
+            </div>
+            <div class="status-item">
+                Ping: <span class="ping-value">14 ms</span>
+            </div>
+            <div class="version-tag">v1.2.0-stable</div>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="tags">
+                <div class="tag"><div class="tag-dot"></div> VLESS</div>
+                <div class="tag">Anti-DPI Bypass</div>
+            </div>
+
+            <h1>Обход блокировок,<br>который <span class="red-text">не ломается.</span></h1>
+            
+            <p class="description">AVANGARD.VPN. Работает на базе протокола VLESS с защитой от DPI-анализатора. Чистый интернет для разработки, рабочих созвонов и деплоя без скачков пинга.</p>
+            
+            <button class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Подключить через Telegram
+            </button>
+            
+            <div class="microtext">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                250 ₽/мес. Настройка за 1 минуту через Telegram.
+            </div>
+
+            <div class="bento-info">
+                <div class="info-col">
+                    <span class="info-label">Протокол</span>
+                    <span class="info-value">VLESS + XTLS</span>
+                </div>
+                <div class="info-col">
+                    <span class="info-label">Маскировка</span>
+                    <span class="info-value">Reality (DPI)</span>
+                </div>
+                <div class="info-col">
+                    <span class="info-label">Скорость</span>
+                    <span class="info-value">до 10 Gbps</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="visual-container">
+                <div class="glow"></div>
+                <div class="glass-card-lg"></div>
+                <div class="glass-circle"></div>
+                <div class="glass-card-sm"></div>
+                <div class="accent-triangle"></div>
+                
+                <div class="visual-label label-top">SECURE_TUNNEL: TRUE</div>
+                <div class="visual-label label-bottom">DPI_PROTECTED</div>
+            </div>
+        </div>
+    </main>
 
 </body>
 </html>
