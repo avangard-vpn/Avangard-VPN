@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>AVANGARD.VPN | Безопасный обход блокировок без потери скорости</title>
     <meta name="description" content="Новое поколение шифрования трафика VLESS + XTLS Reality. Невидимость для систем DPI, обход блокировок и мгновенное соединение.">
     
@@ -25,126 +24,43 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-            position: relative;
-        }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-main); overflow-x: hidden; position: relative; }
 
-        /* === БАЗОВЫЙ ФОН === */
-        .smooth-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2; background-color: var(--bg-dark); overflow: hidden;
-        }
-        
-        .smooth-bg::before {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 80vw; height: 80vh;
-            background: radial-gradient(ellipse, rgba(180, 10, 10, 0.08) 0%, transparent 60%);
-            filter: blur(80px); pointer-events: none;
-        }
+        /* === ФОН === */
+        .smooth-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background-color: var(--bg-dark); overflow: hidden; }
+        .smooth-bg::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vh; background: radial-gradient(ellipse, rgba(180, 10, 10, 0.08) 0%, transparent 60%); filter: blur(80px); pointer-events: none; }
+        .bg-object-1, .bg-object-2 { position: fixed; pointer-events: none; z-index: -1; border-radius: 50% 50% 0 0; border-top: 2px solid rgba(255, 12, 12, 0.5); }
+        .bg-object-1 { bottom: -25vh; left: 50%; transform: translateX(-50%); width: 150vw; height: 60vh; box-shadow: 0 -80px 150px rgba(255, 12, 12, 0.15), inset 0 40px 100px rgba(255, 12, 12, 0.1); filter: blur(3px); }
+        .bg-object-2 { bottom: -35vh; left: 40%; transform: translateX(-50%) rotate(-12deg); width: 130vw; height: 70vh; border-top: 3px solid rgba(255, 12, 12, 0.7); box-shadow: 0 -60px 120px rgba(255, 12, 12, 0.25); filter: blur(5px); opacity: 0.8; }
 
-        /* === 3D-ОБЪЕКТЫ НА ФОНЕ (Имитация светящихся лент) === */
-        .bg-object-1, .bg-object-2 {
-            position: fixed; pointer-events: none; z-index: -1;
-            border-radius: 50% 50% 0 0; border-top: 2px solid rgba(255, 12, 12, 0.5);
-        }
-
-        .bg-object-1 {
-            bottom: -25vh; left: 50%; transform: translateX(-50%);
-            width: 150vw; height: 60vh;
-            box-shadow: 0 -80px 150px rgba(255, 12, 12, 0.15), inset 0 40px 100px rgba(255, 12, 12, 0.1);
-            filter: blur(3px);
-        }
-
-        .bg-object-2 {
-            bottom: -35vh; left: 40%; transform: translateX(-50%) rotate(-12deg);
-            width: 130vw; height: 70vh;
-            border-top: 3px solid rgba(255, 12, 12, 0.7);
-            box-shadow: 0 -60px 120px rgba(255, 12, 12, 0.25);
-            filter: blur(5px); opacity: 0.8;
-        }
-
-        /* === ЕДИНЫЙ НАВБАР === */
-        .navbar-container {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 32px; max-width: 1120px; margin: 24px auto;
-            background: var(--glass-bg); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 100px;
-            position: sticky; top: 24px; z-index: 100;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
+        /* === НАВБАР === */
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
         .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
         .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
-        
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
-        
-        .btn-outline { 
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); 
-            color: var(--text-main); text-decoration: none; padding: 10px 24px; 
-            border-radius: 50px; font-size: 14px; transition: 0.3s; 
-        }
+        .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-main); text-decoration: none; padding: 10px 24px; border-radius: 50px; font-size: 14px; transition: 0.3s; }
         .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
         /* === БЛОК 1: HERO === */
-        .hero-section {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 80px 20px 80px 20px; z-index: 10; position: relative;
-        }
-        .badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(255, 12, 12, 0.05); border: 1px solid rgba(255, 12, 12, 0.3);
-            padding: 8px 16px; border-radius: 50px; font-family: var(--font-mono);
-            font-size: 11px; letter-spacing: 2px; color: var(--text-main); margin-bottom: 32px;
-        }
+        .hero-section { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px 80px 20px; z-index: 10; position: relative; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 12, 12, 0.05); border: 1px solid rgba(255, 12, 12, 0.3); padding: 8px 16px; border-radius: 50px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--text-main); margin-bottom: 32px; }
         h1 { font-size: 64px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
         h1 .text-red { color: var(--accent-red); }
         .subtitle { font-size: 16px; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 48px; }
-        .btn-primary {
-            background: var(--accent-red); color: white; text-decoration: none;
-            padding: 18px 40px; border-radius: 50px; font-size: 16px; font-weight: 600;
-            display: inline-flex; align-items: center; gap: 12px;
-            box-shadow: 0 0 40px rgba(255, 12, 12, 0.4); transition: 0.3s;
-        }
+        .btn-primary { background: var(--accent-red); color: white; text-decoration: none; padding: 18px 40px; border-radius: 50px; font-size: 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 0 40px rgba(255, 12, 12, 0.4); transition: 0.3s; }
         .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 12, 12, 0.6); }
 
-        /* === БЛОК 2: ПРЕИМУЩЕСТВА (С Белым Ховером) === */
-        .features-section { 
-            width: 100%; max-width: 1120px; margin: 0 auto 40px auto; 
-            padding: 0; position: relative; z-index: 10; 
-        }
-        .bento-slider { 
-            display: flex; gap: 24px; padding: 20px 0; 
-            overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; 
-        }
-        .bento-slider::-webkit-scrollbar { display: none; }
-        
-        .card {
-            flex: 1; min-width: 300px; scroll-snap-align: center;
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
-            border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 32px; position: relative; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
-            backdrop-filter: blur(10px); display: flex; flex-direction: column;
-            cursor: pointer;
-        }
-        
-        /* Изменения при наведении (как в аккордеоне) */
-        .card:hover { 
-            background: #FFFFFF; 
-            border-color: #FFFFFF; 
-            transform: translateY(-5px); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
+        /* === БЛОК 2: ПРЕИМУЩЕСТВА === */
+        .features-section { width: 100%; max-width: 1120px; margin: 0 auto 40px auto; padding: 0; position: relative; z-index: 10; }
+        .bento-slider { display: flex; gap: 24px; padding: 20px 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .card { flex: 1; min-width: 300px; scroll-snap-align: center; background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%); border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px; position: relative; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(10px); display: flex; flex-direction: column; cursor: pointer; }
+        .card:hover { background: #FFFFFF; border-color: #FFFFFF; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
         .card:hover h3 { color: #000000; }
         .card:hover p { color: #333333; }
         .card:hover .card-label { color: var(--accent-red); }
         .card:hover .card-label svg { stroke: var(--accent-red); }
-
         .card-label { display: flex; align-items: center; gap: 8px; color: var(--accent-red); font-family: var(--font-mono); font-size: 11px; margin-bottom: 20px; transition: 0.3s; }
         .card-label svg { transition: 0.3s; }
         .card h3 { font-size: 20px; margin-bottom: 12px; transition: 0.3s; color: var(--text-main); }
@@ -153,53 +69,67 @@
         /* === БЛОК 3: ИНСТРУКЦИЯ (АККОРДЕОН) === */
         .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0; position: relative; z-index: 10; }
         .accordion-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px; }
-        .accordion-container {
-            display: flex; height: 420px; width: 100%; gap: 0;
-            border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border);
-        }
+        .accordion-container { display: flex; height: 420px; width: 100%; gap: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border); }
         .accordion-container input[type="radio"] { display: none; }
-        .acc-tab {
-            flex: 1.2; position: relative; cursor: pointer; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
-            background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px);
-            border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; padding: 32px 24px; overflow: hidden;
-        }
+        .acc-tab { flex: 1.2; position: relative; cursor: pointer; transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s; background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(10px); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; padding: 32px 24px; overflow: hidden; }
         .acc-tab:last-child { border-right: none; }
-        .acc-tab::before {
-            content: ''; position: absolute; bottom: -50%; left: -50%; width: 200%; height: 100%;
-            background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 60%);
-            pointer-events: none; opacity: 0.5; transition: 0.3s;
-        }
+        .acc-tab::before { content: ''; position: absolute; bottom: -50%; left: -50%; width: 200%; height: 100%; background: radial-gradient(circle, rgba(255, 12, 12, 0.15) 0%, transparent 60%); pointer-events: none; opacity: 0.5; transition: 0.3s; }
         .acc-tab:hover::before { opacity: 1; }
         input[type="radio"]:checked + label { flex: 4; background: #FFFFFF; color: #000000; cursor: default; }
         input[type="radio"]:checked + label::before { display: none; }
-        
         .step-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; transition: 0.3s;}
         .step-title { font-size: 18px; font-weight: 800; transition: 0.3s; line-height: 1.3;}
-        
         input[type="radio"]:checked + label .step-num { color: var(--accent-red); }
         input[type="radio"]:checked + label .step-title { color: #000000; font-size: 24px; }
-        
         .acc-content { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s; margin-top: 24px; pointer-events: none; min-width: 280px; max-width: 350px;}
         .acc-content p { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 16px; }
         .acc-content ul { list-style: none; padding-left: 0; }
         .acc-content ul li { font-size: 14px; color: #222; margin-bottom: 12px; padding-left: 20px; position: relative; font-weight: 500;}
         .acc-content ul li::before { content: ''; position: absolute; left: 0; top: 6px; width: 6px; height: 6px; background: var(--accent-red); border-radius: 50%; }
         input[type="radio"]:checked + label .acc-content { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        
         .acc-footer { position: absolute; bottom: 32px; left: 24px; right: 24px; border-top: 1px solid #E5E5E5; padding-top: 16px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #888; opacity: 0; transition: opacity 0.3s ease 0.2s; }
         .acc-footer span.dark { color: #000; }
         input[type="radio"]:checked + label .acc-footer { opacity: 1; }
+
+        /* === БЛОК 4: ОТЗЫВЫ === */
+        .testimonials-section { max-width: 1120px; margin: 120px auto 80px auto; padding: 0; position: relative; z-index: 10; }
+        .floating-reviews { position: relative; height: 350px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; }
+        .reviews-title { font-size: 48px; font-weight: 800; text-align: center; line-height: 1.1; z-index: 2; letter-spacing: -1px; }
+        .bubble { position: absolute; background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 50px; padding: 12px 24px; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1; animation: float 6s ease-in-out infinite; }
+        .bubble .dot { width: 8px; height: 8px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
+        .b1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .b2 { bottom: 15%; left: 15%; animation-delay: 1.5s; }
+        .b3 { top: 15%; right: 5%; animation-delay: 0.7s; }
+        .b4 { bottom: 25%; right: 10%; animation-delay: 2.2s; }
+        @keyframes float { 
+            0% { transform: translateY(0px); } 
+            50% { transform: translateY(-15px); } 
+            100% { transform: translateY(0px); } 
+        }
+        .bento-reviews-container { display: flex; background: rgba(20, 20, 20, 0.4); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px); }
+        .review-card { flex: 1; padding: 40px 32px; border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; }
+        .review-card:last-child { border-right: none; }
+        .review-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+        .review-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 32px; flex-grow: 1; }
+        .review-author { display: flex; align-items: center; gap: 16px; }
+        .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #FF0C0C, #4A0000); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: white;}
+        .author-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+        .author-info span { font-size: 12px; color: #666; }
 
         /* === АДАПТИВ === */
         @media (max-width: 1024px) {
             h1 { font-size: 40px; }
             .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
             .nav-links { display: none; }
-            .features-section, .accordion-section { padding: 0 20px; }
+            .features-section, .accordion-section, .testimonials-section { padding: 0 20px; }
             .accordion-container { flex-direction: column; height: auto; }
             .acc-tab { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 20px; }
             input[type="radio"]:checked + label { flex: none; height: auto; padding-bottom: 80px;}
             .acc-content { width: 100%; min-width: 100%; }
+            .floating-reviews { height: auto; flex-direction: column; gap: 16px; padding: 40px 0; }
+            .bubble { position: relative; top: auto; left: auto; right: auto; bottom: auto; animation: none; }
+            .bento-reviews-container { flex-direction: column; }
+            .review-card { border-right: none; border-bottom: 1px solid var(--glass-border); }
         }
     </style>
 </head>
@@ -209,13 +139,13 @@
     <div class="bg-object-1"></div>
     <div class="bg-object-2"></div>
 
-    <!-- Обновленный Nav-bar -->
     <header class="navbar-container">
         <div class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></div>
         <nav class="nav-links">
             <a href="#hero" class="active">Главная</a>
-            <a href="#features">Преимущества</a>
             <a href="#guide">Как подключить</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#">Публичная оферта</a>
         </nav>
         <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
@@ -310,6 +240,52 @@
                     </div>
                     <div class="acc-footer"><span>СТАТУС</span> <span class="dark">Готово к работе</span></div>
                 </label>
+            </div>
+        </section>
+
+        <section id="reviews" class="testimonials-section">
+            <div class="floating-reviews">
+                <h2 class="reviews-title">Что говорят<br>наши клиенты</h2>
+                <div class="bubble b1"><div class="dot"></div>Пинг 15мс!</div>
+                <div class="bubble b2"><div class="dot"></div>Грузит 4K без фризов</div>
+                <div class="bubble b3"><div class="dot"></div>Настроил за минуту</div>
+                <div class="bubble b4"><div class="dot"></div>Работает стабильно</div>
+            </div>
+            
+            <div class="bento-reviews-container">
+                <div class="review-card">
+                    <div class="review-title">Незаменимо для работы</div>
+                    <div class="review-text">«Постоянно работаю с тяжелыми исходниками и нейросетями. До этого перебрал кучу сервисов, которые постоянно отваливались. Здесь скорость скачивания как у домашнего провайдера.»</div>
+                    <div class="review-author">
+                        <div class="avatar-placeholder">А</div>
+                        <div class="author-info">
+                            <h4>Александр М.</h4>
+                            <span>Motion Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-title">Идеально для игр</div>
+                    <div class="review-text">«Главное для меня — низкий пинг. Сервер во Франкфурте выдает отличные показатели, задержек в матчмейкинге нет от слова совсем. Рекомендую.»</div>
+                    <div class="review-author">
+                        <div class="avatar-placeholder">И</div>
+                        <div class="author-info">
+                            <h4>Иван К.</h4>
+                            <span>Студент</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-title">Отличная поддержка</div>
+                    <div class="review-text">«Очень понравилось, что покупка идет через Telegram. Никаких мутных сайтов и регистраций. Нажал пару кнопок, получил ключ, импортировал в Karing — всё работает.»</div>
+                    <div class="review-author">
+                        <div class="avatar-placeholder">Е</div>
+                        <div class="author-info">
+                            <h4>Елена В.</h4>
+                            <span>UI/UX Designer</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
