@@ -23,7 +23,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-main); overflow-x: hidden; position: relative; }
 
         /* === ФОН === */
@@ -35,7 +34,7 @@
 
         /* === НАВБАР === */
         .navbar-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
-        .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main);}
         .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
@@ -66,7 +65,7 @@
         .card h3 { font-size: 20px; margin-bottom: 12px; transition: 0.3s; color: var(--text-main); }
         .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; transition: 0.3s; }
 
-        /* === БЛОК 3: ИНСТРУКЦИЯ (АККОРДЕОН) === */
+        /* === БЛОК 3: ИНСТРУКЦИЯ === */
         .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0; position: relative; z-index: 10; }
         .accordion-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px; }
         .accordion-container { display: flex; height: 420px; width: 100%; gap: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border); }
@@ -101,11 +100,7 @@
         .b2 { bottom: 15%; left: 15%; animation-delay: 1.5s; }
         .b3 { top: 15%; right: 5%; animation-delay: 0.7s; }
         .b4 { bottom: 25%; right: 10%; animation-delay: 2.2s; }
-        @keyframes float { 
-            0% { transform: translateY(0px); } 
-            50% { transform: translateY(-15px); } 
-            100% { transform: translateY(0px); } 
-        }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
         .bento-reviews-container { display: flex; background: rgba(20, 20, 20, 0.4); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px); }
         .review-card { flex: 1; padding: 40px 32px; border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; }
         .review-card:last-child { border-right: none; }
@@ -115,6 +110,52 @@
         .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #FF0C0C, #4A0000); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: white;}
         .author-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
         .author-info span { font-size: 12px; color: #666; }
+
+        /* === ФУТЕР (НОВЫЙ) === */
+        footer {
+            margin-top: 100px;
+            padding: 80px 40px 0;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(10px);
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1120px;
+            margin: 0 auto 60px;
+        }
+        .footer-col h4 { font-size: 16px; margin-bottom: 20px; color: var(--text-main); }
+        .footer-col p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; max-width: 300px; line-height: 1.6; }
+        .footer-nav { display: flex; flex-direction: column; gap: 12px; }
+        .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-nav a:hover { color: var(--accent-red); }
+        
+        .footer-bottom-text {
+            font-size: 18vw;
+            font-weight: 800;
+            text-align: center;
+            line-height: 0.75;
+            color: var(--text-main);
+            letter-spacing: -5px;
+            margin: 0 -40px; /* Чтобы текст уходил за края экрана */
+            white-space: nowrap;
+            user-select: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #555;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 40px;
+        }
 
         /* === АДАПТИВ === */
         @media (max-width: 1024px) {
@@ -130,6 +171,10 @@
             .bubble { position: relative; top: auto; left: auto; right: auto; bottom: auto; animation: none; }
             .bento-reviews-container { flex-direction: column; }
             .review-card { border-right: none; border-bottom: 1px solid var(--glass-border); }
+            
+            /* Адаптив для футера */
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
         }
     </style>
 </head>
@@ -140,12 +185,12 @@
     <div class="bg-object-2"></div>
 
     <header class="navbar-container">
-        <div class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></div>
+        <a href="#" class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></a>
         <nav class="nav-links">
             <a href="#hero" class="active">Главная</a>
             <a href="#guide">Как подключить</a>
             <a href="#reviews">Отзывы</a>
-            <a href="#">Публичная оферта</a>
+            <a href="#legal">Публичная оферта</a>
         </nav>
         <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
@@ -290,10 +335,49 @@
         </section>
     </main>
 
-    <footer>
-        <div style="text-align: center; padding: 40px; color: #555; font-size: 12px;">
+    <!-- НОВЫЙ ПОДВАЛ -->
+    <footer id="legal">
+        <div class="footer-top">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 16px;"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></a>
+                <p>Безопасный обход блокировок и анонимность в сети. Скорость до 10 Гбит/с на базе протокола VLESS.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Навигация</h4>
+                <nav class="footer-nav">
+                    <a href="#hero">Главная</a>
+                    <a href="#features">Преимущества</a>
+                    <a href="#guide">Инструкция</a>
+                    <a href="#reviews">Отзывы</a>
+                </nav>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Правовая информация</h4>
+                <nav class="footer-nav">
+                    <a href="#">Публичная оферта</a>
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Правила возврата</a>
+                </nav>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <nav class="footer-nav">
+                    <a href="#">Telegram Бот</a>
+                    <a href="#">Связаться с нами</a>
+                    <a href="#">FAQ (Частые вопросы)</a>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="footer-bottom-text">AVANGARD</div>
+        
+        <div class="copyright">
             &copy; 2026 AVANGARD.VPN. Все права защищены.
         </div>
     </footer>
+
 </body>
 </html>
