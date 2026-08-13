@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Публичная оферта | AVANGARD.VPN</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #030303;
+            --accent-red: #FF0C0C;
+            --text-main: #FFFFFF;
+            --text-muted: #8E8E93;
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Manrope', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-main); overflow-x: hidden; position: relative; line-height: 1.6; }
+
+        /* === ФОН (как на главной) === */
+        .smooth-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background-color: var(--bg-dark); overflow: hidden; }
+        .smooth-bg::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vh; background: radial-gradient(ellipse, rgba(180, 10, 10, 0.08) 0%, transparent 60%); filter: blur(80px); pointer-events: none; }
+        .bg-object-1, .bg-object-2 { position: fixed; pointer-events: none; z-index: -1; border-radius: 50% 50% 0 0; border-top: 2px solid rgba(255, 12, 12, 0.5); }
+        .bg-object-1 { bottom: -25vh; left: 50%; transform: translateX(-50%); width: 150vw; height: 60vh; box-shadow: 0 -80px 150px rgba(255, 12, 12, 0.15), inset 0 40px 100px rgba(255, 12, 12, 0.1); filter: blur(3px); }
+        .bg-object-2 { bottom: -35vh; left: 40%; transform: translateX(-50%) rotate(-12deg); width: 130vw; height: 70vh; border-top: 3px solid rgba(255, 12, 12, 0.7); box-shadow: 0 -60px 120px rgba(255, 12, 12, 0.25); filter: blur(5px); opacity: 0.8; }
+
+        /* === НАВБАР === */
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main);}
+        .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+        .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-main); text-decoration: none; padding: 10px 24px; border-radius: 50px; font-size: 14px; transition: 0.3s; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* === КОНТЕЙНЕР ДОКУМЕНТА === */
+        .legal-wrapper { max-width: 860px; margin: 60px auto 100px; padding: 0 20px; position: relative; z-index: 10; }
+        .legal-box { background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 60px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        
+        .legal-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 40px; }
+        .legal-header h1 { font-size: 32px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .legal-header p { color: var(--text-muted); font-size: 14px; }
+
+        .legal-content h2 { font-size: 20px; font-weight: 700; margin: 40px 0 16px; color: var(--text-main); }
+        .legal-content p { font-size: 15px; color: #CCCCCC; margin-bottom: 16px; line-height: 1.7; }
+        .legal-content ul { margin-bottom: 16px; padding-left: 20px; }
+        .legal-content li { font-size: 15px; color: #CCCCCC; margin-bottom: 8px; line-height: 1.7; }
+        .legal-content strong { color: var(--text-main); font-weight: 600; }
+        
+        /* === ФУТЕР (Минимальный для страниц документов) === */
+        footer { margin-top: 60px; padding: 40px 20px; border-top: 1px solid var(--glass-border); text-align: center; font-size: 12px; color: #555; position: relative; z-index: 10; background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(10px); }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 1024px) {
+            .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
+            .nav-links { display: none; }
+            .legal-box { padding: 30px 20px; }
+            .legal-header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="smooth-bg"></div>
+    <div class="bg-object-1"></div>
+    <div class="bg-object-2"></div>
+
+    <header class="navbar-container">
+        <a href="index.html" class="logo"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></a>
+        <nav class="nav-links">
+            <a href="index.html#hero">Главная</a>
+            <a href="index.html#guide">Как подключить</a>
+            <a href="index.html#reviews">Отзывы</a>
+            <a href="offer.html" class="active">Публичная оферта</a>
+        </nav>
+        <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
+    </header>
+
+    <main class="legal-wrapper">
+        <div class="legal-box">
+            <div class="legal-header">
+                <h1>ПУБЛИЧНАЯ ОФЕРТА</h1>
+                <p>о предоставлении услуг защищенного информационного соединения<br>Редакция от «[Число]» [Месяц] 2026 г.</p>
+            </div>
+            
+            <div class="legal-content">
+                <p>Настоящий документ является официальным предложением (публичной офертой) плательщика налога на профессиональный доход (самозанятого) <strong>[Ваши ФИО полностью]</strong>, ИНН <strong>[Ваш ИНН]</strong>, именуемого в дальнейшем «Исполнитель», заключить договор на оказание информационно-вычислительных услуг с любым дееспособным физическим лицом, именуемым в дальнейшем «Заказчик», на изложенных ниже условиях.</p>
+
+                <h2>1. Общие положения и акцепт оферты</h2>
+                <p>1.1. Акцептом (полным и безоговорочным принятием) условий настоящей Оферты считается совокупность двух действий Заказчика:</p>
+                <ul>
+                    <li>Нажатие кнопки /start (или аналогичной команды запуска) в официальном Telegram-боте Исполнителя: <strong>[ссылка на бота]</strong>.</li>
+                    <li>Внесение оплаты за выбранный тарифный план.</li>
+                </ul>
+                <p>1.2. С момента акцепта Оферты Договор считается заключенным.</p>
+
+                <h2>2. Предмет договора</h2>
+                <p>2.1. Исполнитель обязуется предоставить Заказчику услуги по организации вычислительных мощностей для создания виртуальной частной сети (VPN) (далее — «Услуги»), а Заказчик обязуется оплатить эти Услуги в соответствии с выбранным тарифом.</p>
+                <p>2.2. Услуги предоставляются исключительно для личного, некоммерческого использования с целью повышения уровня конфиденциальности и безопасности передачи данных Заказчика в сети Интернет.</p>
+
+                <h2>3. Права и обязанности сторон</h2>
+                <p><strong>3.1. Заказчик обязуется:</strong></p>
+                <ul>
+                    <li>Не передавать свой уникальный ключ доступа третьим лицам.</li>
+                    <li>Не использовать предоставленные мощности для рассылки спама, скачивания материалов, защищенных авторским правом (через BitTorrent), и любых иных действий, противоречащих законодательству РФ.</li>
+                </ul>
+                <p><strong>3.2. Исполнитель имеет право:</strong></p>
+                <p>В одностороннем порядке заблокировать ключ доступа Заказчика без возврата денежных средств в случае нарушения Заказчиком п. 3.1 настоящей Оферты или выявления аномальной нагрузки на сеть с ключа Заказчика.</p>
+
+                <h2>4. Ограничение ответственности</h2>
+                <p>4.1. Услуги предоставляются по принципу «как есть». Исполнитель не гарантирует 100% непрерывность работы сети и отсутствие сбоев, связанных с работой магистральных провайдеров или дата-центров.</p>
+                <p>4.2. Исполнитель не несет ответственности за содержание информации, передаваемой или получаемой Заказчиком через VPN-сеть.</p>
+
+                <h2>5. Обработка персональных данных</h2>
+                <p>5.1. Исполнитель собирает минимально необходимый объем данных Заказчика: Telegram ID и публичное имя (username) в мессенджере.</p>
+                <p>5.2. Исполнитель гарантирует, что не осуществляет мониторинг, сбор и хранение информации о посещаемых Заказчиком веб-ресурсах (Zero-log политика).</p>
+
+                <h2>6. Реквизиты исполнителя</h2>
+                <p>
+                    <strong>ФИО:</strong> [Ваши ФИО полностью]<br>
+                    <strong>ИНН:</strong> [Ваш ИНН]<br>
+                    <strong>Email:</strong> [Ваш email]<br>
+                    <strong>Telegram:</strong> [Ваш контакт]
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 AVANGARD.VPN. Все права защищены.
+    </footer>
+
+</body>
+</html>
