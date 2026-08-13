@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -52,7 +52,7 @@
         .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 12, 12, 0.6); }
 
         /* === БЛОК 2: ПРЕИМУЩЕСТВА === */
-        .features-section { width: 100%; max-width: 1120px; margin: 0 auto 40px auto; padding: 0; position: relative; z-index: 10; }
+        .features-section { width: 100%; max-width: 1120px; margin: 0 auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
         .bento-slider { display: flex; gap: 24px; padding: 20px 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .card { flex: 1; min-width: 300px; scroll-snap-align: center; background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%); border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px; position: relative; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(10px); display: flex; flex-direction: column; cursor: pointer; }
         .card:hover { background: #FFFFFF; border-color: #FFFFFF; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
@@ -66,7 +66,7 @@
         .card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; transition: 0.3s; }
 
         /* === БЛОК 3: ИНСТРУКЦИЯ === */
-        .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0; position: relative; z-index: 10; }
+        .accordion-section { max-width: 1120px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 10; }
         .accordion-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px; }
         .accordion-container { display: flex; height: 420px; width: 100%; gap: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--glass-border); }
         .accordion-container input[type="radio"] { display: none; }
@@ -91,7 +91,7 @@
         input[type="radio"]:checked + label .acc-footer { opacity: 1; }
 
         /* === БЛОК 4: ОТЗЫВЫ === */
-        .testimonials-section { max-width: 1120px; margin: 120px auto 80px auto; padding: 0; position: relative; z-index: 10; }
+        .testimonials-section { max-width: 1120px; margin: 120px auto 80px auto; padding: 0 20px; position: relative; z-index: 10; }
         .floating-reviews { position: relative; height: 350px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; }
         .reviews-title { font-size: 48px; font-weight: 800; text-align: center; line-height: 1.1; z-index: 2; letter-spacing: -1px; }
         .bubble { position: absolute; background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 50px; padding: 12px 24px; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1; animation: float 6s ease-in-out infinite; }
@@ -114,7 +114,8 @@
         /* === ФУТЕР === */
         footer {
             margin-top: 100px;
-            padding: 80px 40px 0;
+            /* Выровняли padding по сетке других блоков: 20px по бокам */
+            padding: 80px 20px 0;
             border-top: 1px solid var(--glass-border);
             position: relative;
             z-index: 10;
@@ -137,14 +138,14 @@
         .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-nav a:hover { color: var(--accent-red); }
         
-        /* Идеальное растяжение AVANGARD */
+        /* Выровненный AVANGARD по вашим данным из DevTools */
         .footer-bottom-text {
-            font-size: 25vw;
-            font-weight: 800;
+            font-size: 20vw;
+            font-weight: 700; /* На 100 единиц меньше */
             text-align: center;
-            line-height: 0.75;
+            line-height: 0.8;
             color: var(--text-main);
-            letter-spacing: -4px;
+            letter-spacing: -12px; /* Из вашего скриншота */
             max-width: 1120px; 
             margin: 0 auto; 
             width: 100%;
@@ -164,7 +165,7 @@
         /* === АДАПТИВ === */
         @media (min-width: 1120px) {
             .footer-bottom-text {
-                font-size: 280px; /* Увеличено для идеального совпадения с шириной 1120px */
+                font-size: 220px; /* Чуть меньше 230px, чтобы вписаться идеально */
             }
         }
         
@@ -172,7 +173,6 @@
             h1 { font-size: 40px; }
             .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
             .nav-links { display: none; }
-            .features-section, .accordion-section, .testimonials-section { padding: 0 20px; }
             .accordion-container { flex-direction: column; height: auto; }
             .acc-tab { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 20px; }
             input[type="radio"]:checked + label { flex: none; height: auto; padding-bottom: 80px;}
