@@ -111,7 +111,7 @@
         .author-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
         .author-info span { font-size: 12px; color: #666; }
 
-        /* === ФУТЕР (НОВЫЙ) === */
+        /* === ФУТЕР === */
         footer {
             margin-top: 100px;
             padding: 80px 40px 0;
@@ -136,14 +136,17 @@
         .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-nav a:hover { color: var(--accent-red); }
         
+        /* Исправление надписи AVANGARD */
         .footer-bottom-text {
-            font-size: 18vw;
+            font-size: 14vw; /* Уменьшено */
             font-weight: 800;
             text-align: center;
-            line-height: 0.75;
+            line-height: 0.8;
             color: var(--text-main);
-            letter-spacing: -5px;
-            margin: 0 -40px; /* Чтобы текст уходил за края экрана */
+            letter-spacing: -2px;
+            max-width: 1120px; /* Привязано к ширине колонок */
+            margin: 0 auto; /* Центрирование по сетке */
+            width: 100%;
             white-space: nowrap;
             user-select: none;
         }
@@ -158,6 +161,12 @@
         }
 
         /* === АДАПТИВ === */
+        @media (min-width: 1200px) {
+            .footer-bottom-text {
+                font-size: 190px; /* Жесткий лимит на больших экранах, чтобы текст не выходил за 1120px */
+            }
+        }
+        
         @media (max-width: 1024px) {
             h1 { font-size: 40px; }
             .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
@@ -174,7 +183,7 @@
             
             /* Адаптив для футера */
             .footer-top { flex-direction: column; gap: 40px; }
-            .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
+            .footer-bottom-text { font-size: 20vw; letter-spacing: -2px; }
         }
     </style>
 </head>
@@ -335,7 +344,7 @@
         </section>
     </main>
 
-    <!-- НОВЫЙ ПОДВАЛ -->
+    <!-- ПОДВАЛ -->
     <footer id="legal">
         <div class="footer-top">
             <div class="footer-col">
