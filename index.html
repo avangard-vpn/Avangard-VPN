@@ -136,16 +136,16 @@
         .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-nav a:hover { color: var(--accent-red); }
         
-        /* Исправление надписи AVANGARD */
+        /* Идеальное растяжение AVANGARD */
         .footer-bottom-text {
-            font-size: 14vw; /* Уменьшено */
+            font-size: 21.5vw;
             font-weight: 800;
             text-align: center;
-            line-height: 0.8;
+            line-height: 0.75;
             color: var(--text-main);
-            letter-spacing: -2px;
-            max-width: 1120px; /* Привязано к ширине колонок */
-            margin: 0 auto; /* Центрирование по сетке */
+            letter-spacing: -3px;
+            max-width: 1120px; 
+            margin: 0 auto; 
             width: 100%;
             white-space: nowrap;
             user-select: none;
@@ -163,7 +163,7 @@
         /* === АДАПТИВ === */
         @media (min-width: 1200px) {
             .footer-bottom-text {
-                font-size: 190px; /* Жесткий лимит на больших экранах, чтобы текст не выходил за 1120px */
+                font-size: 248px; /* Жесткий лимит для экранов шире 1120px */
             }
         }
         
@@ -181,9 +181,8 @@
             .bento-reviews-container { flex-direction: column; }
             .review-card { border-right: none; border-bottom: 1px solid var(--glass-border); }
             
-            /* Адаптив для футера */
             .footer-top { flex-direction: column; gap: 40px; }
-            .footer-bottom-text { font-size: 20vw; letter-spacing: -2px; }
+            .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
         }
     </style>
 </head>
