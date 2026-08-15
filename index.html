@@ -14,7 +14,6 @@
     <meta property="og:description" content="Стабильный VPN с высокой скоростью. Работает везде, включая Госуслуги и банки.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://avangard-vpn.ru">
-    <!-- Сюда позже добавим ссылку на картинку логотипа -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,14 +43,12 @@
         .bg-object-2 { bottom: -35vh; left: 40%; transform: translateX(-50%) rotate(-12deg); width: 130vw; height: 70vh; border-top: 3px solid rgba(255, 12, 12, 0.7); box-shadow: 0 -60px 120px rgba(255, 12, 12, 0.25); filter: blur(5px); opacity: 0.8; }
 
         /* === НАВБАР === */
-        .navbar-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-container { display: flex; justify-content: center; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); gap: 40px; }
         .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main);}
         .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
-        .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-main); text-decoration: none; padding: 10px 24px; border-radius: 50px; font-size: 14px; transition: 0.3s; }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
         /* === БЛОК 1: HERO === */
         .hero-section { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px 80px 20px; z-index: 10; position: relative; }
@@ -122,10 +119,20 @@
         .author-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
         .author-info span { font-size: 12px; color: #666; }
 
+        /* === БЛОК 5: СЕРВИСЫ БЕЗ ОТКЛЮЧЕНИЯ VPN === */
+        .native-services-section { max-width: 1120px; margin: 80px auto; padding: 0 20px; position: relative; z-index: 10; text-align: center; }
+        .native-services-box { background: linear-gradient(145deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%); border: 1px solid var(--glass-border); border-radius: 24px; padding: 60px 40px; backdrop-filter: blur(16px); position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .native-services-box::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-red), transparent); }
+        .native-title { font-size: 36px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .native-subtitle { font-size: 16px; color: var(--text-muted); max-width: 650px; margin: 0 auto 40px; line-height: 1.6; }
+        .apps-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .app-pill { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 50px; display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; color: var(--text-main); transition: 0.3s; }
+        .app-pill:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-3px); }
+        .app-dot { width: 8px; height: 8px; background: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
+
         /* === ФУТЕР === */
         footer {
             margin-top: 100px;
-            /* Выровняли padding по сетке других блоков: 20px по бокам */
             padding: 80px 20px 0;
             border-top: 1px solid var(--glass-border);
             position: relative;
@@ -149,14 +156,13 @@
         .footer-nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-nav a:hover { color: var(--accent-red); }
         
-        /* Выровненный AVANGARD по вашим данным из DevTools */
         .footer-bottom-text {
             font-size: 20vw;
-            font-weight: 700; /* На 100 единиц меньше */
+            font-weight: 700;
             text-align: center;
             line-height: 0.8;
             color: var(--text-main);
-            letter-spacing: -12px; /* Из вашего скриншота */
+            letter-spacing: -12px;
             max-width: 1120px; 
             margin: 0 auto; 
             width: 100%;
@@ -176,13 +182,13 @@
         /* === АДАПТИВ === */
         @media (min-width: 1120px) {
             .footer-bottom-text {
-                font-size: 220px; /* Чуть меньше 230px, чтобы вписаться идеально */
+                font-size: 220px;
             }
         }
         
         @media (max-width: 1024px) {
             h1 { font-size: 40px; }
-            .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
+            .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; flex-wrap: wrap; }
             .nav-links { display: none; }
             .accordion-container { flex-direction: column; height: auto; }
             .acc-tab { border-right: none; border-bottom: 1px solid var(--glass-border); padding: 20px; }
@@ -192,25 +198,26 @@
             .bubble { position: relative; top: auto; left: auto; right: auto; bottom: auto; animation: none; }
             .bento-reviews-container { flex-direction: column; }
             .review-card { border-right: none; border-bottom: 1px solid var(--glass-border); }
-            
+            .native-title { font-size: 28px; }
             .footer-top { flex-direction: column; gap: 40px; }
             .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
         }
     </style>
+    
     <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111636424', 'ym');
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111636424', 'ym');
 
-    ym(111636424, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111636424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
- <meta name="google-site-verification" content="w2IbzCwGgLUF1YVY_hn8cmIpAJ_Urjr6anY8hsdPyR0" />
+        ym(111636424, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111636424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    <meta name="google-site-verification" content="w2IbzCwGgLUF1YVY_hn8cmIpAJ_Urjr6anY8hsdPyR0" />
 </head>
 <body>
 
@@ -226,7 +233,6 @@
             <a href="#reviews">Отзывы</a>
             <a href="offer.html">Публичная оферта</a>
         </nav>
-        <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
 
     <main>
@@ -267,7 +273,7 @@
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         BANDWIDTH
                     </div>
-                    <h3>До 10 Гбит/с</h3>
+                    <h3>До 1 Гбит/с</h3>
                     <p>Мощные серверы с широкими каналами. Хватит для 4K-видео и тяжелых игр.</p>
                 </article>
             </div>
@@ -367,6 +373,22 @@
                 </div>
             </div>
         </section>
+
+        <!-- НОВЫЙ БЛОК: РАБОТА С СЕРВИСАМИ БЕЗ ОТКЛЮЧЕНИЯ VPN -->
+        <section class="native-services-section">
+            <div class="native-services-box">
+                <h2 class="native-title">Работают <span class="text-red">без отключения</span> VPN</h2>
+                <p class="native-subtitle">Умная маршрутизация трафика позволяет беспрепятственно пользоваться российскими банками, государственными порталами и развлекательными платформами на максимальной скорости.</p>
+                <div class="apps-grid">
+                    <div class="app-pill"><div class="app-dot"></div>Госуслуги</div>
+                    <div class="app-pill"><div class="app-dot"></div>СберБанк</div>
+                    <div class="app-pill"><div class="app-dot"></div>Т-Банк</div>
+                    <div class="app-pill"><div class="app-dot"></div>Кинопоиск</div>
+                    <div class="app-pill"><div class="app-dot"></div>VK</div>
+                    <div class="app-pill"><div class="app-dot"></div>Яндекс</div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- ПОДВАЛ -->
@@ -374,7 +396,7 @@
         <div class="footer-top">
             <div class="footer-col">
                 <a href="#" class="logo" style="margin-bottom: 16px;"><div class="logo-dot"></div>AVANGARD.<span class="text-red">VPN</span></a>
-                <p>Безопасный обход блокировок и анонимность в сети. Скорость до 10 Гбит/с на базе протокола VLESS.</p>
+                <p>Безопасный обход блокировок и анонимность в сети. Скорость до 1 Гбит/с на базе протокола VLESS.</p>
             </div>
             
             <div class="footer-col">

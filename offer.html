@@ -32,14 +32,12 @@
         .bg-object-2 { bottom: -35vh; left: 40%; transform: translateX(-50%) rotate(-12deg); width: 130vw; height: 70vh; border-top: 3px solid rgba(255, 12, 12, 0.7); box-shadow: 0 -60px 120px rgba(255, 12, 12, 0.25); filter: blur(5px); opacity: 0.8; }
 
         /* === НАВБАР === */
-        .navbar-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-container { display: flex; justify-content: center; align-items: center; padding: 16px 32px; max-width: 1120px; margin: 24px auto; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 100px; position: sticky; top: 24px; z-index: 100; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); gap: 40px; }
         .logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main);}
         .logo-dot { width: 10px; height: 10px; background-color: var(--accent-red); border-radius: 50%; box-shadow: 0 0 10px var(--accent-red); }
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
-        .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-main); text-decoration: none; padding: 10px 24px; border-radius: 50px; font-size: 14px; transition: 0.3s; }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
         /* === КОНТЕЙНЕР ДОКУМЕНТА === */
         .legal-wrapper { max-width: 860px; margin: 60px auto 100px; padding: 0 20px; position: relative; z-index: 10; }
@@ -60,7 +58,7 @@
 
         /* === АДАПТИВ === */
         @media (max-width: 1024px) {
-            .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; }
+            .navbar-container { margin: 16px; padding: 16px; border-radius: 20px; flex-wrap: wrap; }
             .nav-links { display: none; }
             .legal-box { padding: 30px 20px; }
             .legal-header h1 { font-size: 24px; }
@@ -94,7 +92,6 @@
             <a href="index.html#reviews">Отзывы</a>
             <a href="offer.html" class="active">Публичная оферта</a>
         </nav>
-        <a href="#" class="btn-outline">Личный кабинет &nbsp; ›</a>
     </header>
 
     <main class="legal-wrapper">
