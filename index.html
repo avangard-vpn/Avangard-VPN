@@ -119,21 +119,21 @@
         .author-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
         .author-info span { font-size: 12px; color: #666; }
 
-        /* === БЛОК 5: СЕРВИСЫ (ПРОЗРАЧНЫЙ ФОН + ЛЕВИТИРУЮЩИЕ ИКОНКИ + ЦЕНТРАЛЬНЫЙ ТЕКСТ С БЛЮРОМ КАК НА РЕФЕРЕНСЕ) === */
+        /* === БЛОК 5: РАБОТАЮТ БЕЗ ОТКЛЮЧЕНИЯ VPN (С КАРТИНКАМИ И СЕТКОЙ) === */
         .native-services-section { max-width: 1120px; margin: 90px auto; padding: 0 20px; position: relative; z-index: 10; text-align: center; }
-        .native-services-box { background: transparent; border: none; padding: 80px 20px; position: relative; overflow: visible; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; }
+        .native-services-box { background: transparent; border: none; padding: 80px 20px; position: relative; overflow: visible; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 420px; }
         
-        /* Сетка левитирующих иконок приложений на заднем плане */
+        /* Плавающие левитирующие иконки на фоне под изображения */
         .floating-icons-bg { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-        .floating-app-icon { position: absolute; width: 56px; height: 56px; background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); backdrop-filter: blur(12px); animation: floatAppIcon 6s ease-in-out infinite; }
+        .floating-app-icon { position: absolute; width: 60px; height: 60px; background: rgba(20, 20, 20, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); backdrop-filter: blur(12px); animation: floatAppIcon 6s ease-in-out infinite; overflow: hidden; }
+        .floating-app-icon img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Позиционирование иконок по всему блоку для эффекта референса */
-        .fi-1 { top: 5%; left: 12%; animation-delay: 0s; }
-        .fi-2 { top: 10%; right: 15%; animation-delay: 1.5s; }
-        .fi-3 { top: 45%; left: 4%; animation-delay: 0.8s; }
-        .fi-4 { top: 40%; right: 6%; animation-delay: 2.2s; }
-        .fi-5 { bottom: 10%; left: 18%; animation-delay: 1.1s; }
-        .fi-6 { bottom: 5%; right: 20%; animation-delay: 2.7s; }
+        .fi-1 { top: 8%; left: 10%; animation-delay: 0s; }
+        .fi-2 { top: 12%; right: 12%; animation-delay: 1.5s; }
+        .fi-3 { top: 48%; left: 3%; animation-delay: 0.8s; }
+        .fi-4 { top: 42%; right: 5%; animation-delay: 2.2s; }
+        .fi-5 { bottom: 8%; left: 15%; animation-delay: 1.1s; }
+        .fi-6 { bottom: 5%; right: 18%; animation-delay: 2.7s; }
 
         @keyframes floatAppIcon {
             0% { transform: translateY(0px) rotate(0deg); }
@@ -141,14 +141,14 @@
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* Центральная карточка с текстом и легким блюром поверх иконок */
-        .native-content-wrapper { position: relative; z-index: 2; max-width: 650px; margin: 0 auto; background: rgba(10, 10, 10, 0.65); border: 1px solid var(--glass-border); border-radius: 28px; padding: 48px 40px; backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+        /* Центральная карточка с текстом */
+        .native-content-wrapper { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; background: rgba(10, 10, 10, 0.7); border: 1px solid var(--glass-border); border-radius: 28px; padding: 48px 40px; backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
         .native-title { font-size: 38px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.2; }
         .native-subtitle { font-size: 15px; color: var(--text-muted); margin: 0 auto 32px; line-height: 1.6; }
         
-        /* Аккуратные пилюли под текстом */
-        .apps-grid { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .app-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-main); transition: 0.3s; }
+        /* Ровная сетка названий (по 3 в ряд, симметрично) */
+        .apps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 520px; margin: 0 auto; }
+        .app-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 12px 16px; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-main); transition: 0.3s; }
         .app-pill:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
         .app-dot { width: 6px; height: 6px; background: var(--accent-red); border-radius: 50%; box-shadow: 0 0 8px var(--accent-red); }
 
@@ -223,7 +223,8 @@
             .native-title { font-size: 28px; }
             .footer-top { flex-direction: column; gap: 40px; }
             .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
-            .floating-app-icon { width: 44px; height: 44px; font-size: 16px; }
+            .floating-app-icon { width: 44px; height: 44px; }
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
     
@@ -397,22 +398,22 @@
             </div>
         </section>
 
-        <!-- НОВЫЙ БЛОК: СЕРВИСЫ С ЛЕВИТИРУЮЩИМИ ИКОНКАМИ И ЦЕНТРАЛЬНЫМ ТЕКСТОМ НА СТЕКЛЯННОЙ ПОДЛОЖКЕ -->
+        <!-- БЛОК С ЛЕВИТИРУЮЩИМИ КАРТИНКАМИ И СЕТКОЙ НАЗВАНИЙ -->
         <section class="native-services-section">
             <div class="native-services-box">
-                <!-- Плавающие левитирующие иконки на прозрачном фоне за текстом -->
+                <!-- Плавающие блоки под твои картинки логотипов -->
                 <div class="floating-icons-bg">
-                    <div class="floating-app-icon fi-1">🏛️</div>
-                    <div class="floating-app-icon fi-2">💳</div>
-                    <div class="floating-app-icon fi-3">🅿️</div>
-                    <div class="floating-app-icon fi-4">🎬</div>
-                    <div class="floating-app-icon fi-5">🌐</div>
-                    <div class="floating-app-icon fi-6">📱</div>
+                    <div class="floating-app-icon fi-1"><img src="images/gosuslugi.png" alt="Госуслуги"></div>
+                    <div class="floating-app-icon fi-2"><img src="images/sber.png" alt="СберБанк"></div>
+                    <div class="floating-app-icon fi-3"><img src="images/t-bank.png" alt="Т-Банк"></div>
+                    <div class="floating-app-icon fi-4"><img src="images/kinopoisk.png" alt="Кинопоиск"></div>
+                    <div class="floating-app-icon fi-5"><img src="images/vk.png" alt="VK"></div>
+                    <div class="floating-app-icon fi-6"><img src="images/yandex.png" alt="Яндекс"></div>
                 </div>
                 
-                <!-- Центральная плашка с размытием (glassmorphism) и текстом поверх летающих иконок -->
+                <!-- Центральный блок с текстом и ровной сеткой названий -->
                 <div class="native-content-wrapper">
-                    <h2 class="native-title">Работают <span class="text-red">без отключения</span> VPN</h2>
+                    <h2 class="native-title">Работают без отключения VPN</h2>
                     <p class="native-subtitle">Умная маршрутизация трафика позволяет беспрепятственно пользоваться российскими банками, государственными порталами и развлекательными платформами на максимальной скорости.</p>
                     <div class="apps-grid">
                         <div class="app-pill"><div class="app-dot"></div>Госуслуги</div>
