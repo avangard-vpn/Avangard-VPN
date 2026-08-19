@@ -120,34 +120,46 @@
         .author-info span { font-size: 12px; color: #666; }
 
         /* === БЛОК 5: ТАРИФЫ (PRICING) === */
-        .pricing-section { max-width: 1120px; margin: 90px auto; padding: 80px 20px; position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; min-height: 500px; }
+        .pricing-section { max-width: 1120px; margin: 90px auto; padding: 80px 20px; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; min-height: 500px; }
         
-        .pricing-bg-text { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-size: 180px; font-weight: 800; color: rgba(255, 255, 255, 0.6); z-index: 0; user-select: none; letter-spacing: -6px; filter: blur(6px); pointer-events: none; }
+        .pricing-title { text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 50px; width: 100%; color: var(--text-main); }
         
         .pricing-grid { display: flex; gap: 24px; z-index: 2; position: relative; width: 100%; }
         
         .pricing-card { flex: 1; background: rgba(15, 15, 15, 0.4); border: 1px solid var(--glass-border); border-radius: 28px; padding: 40px 32px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .pricing-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
         
-        .plan-subtitle { font-size: 14px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; }
+        .plan-header { margin-bottom: 24px; position: relative; }
         
-        /* Эффект выцветания на цене как на скриншоте */
+        /* Светящиеся баджи */
+        .plan-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; border: 1px solid; font-family: var(--font-main); letter-spacing: 0.5px; }
+        
+        .plan-badge.base { border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.1); color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); }
+        .plan-badge.elite { border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.1); color: #a855f7; box-shadow: 0 0 20px rgba(168, 85, 247, 0.15); }
+        .plan-badge.premium { border-color: rgba(250, 204, 21, 0.4); background: rgba(250, 204, 21, 0.1); color: #facc15; box-shadow: 0 0 20px rgba(250, 204, 21, 0.15); }
+        
+        /* Точки внутри баджей */
+        .badge-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .plan-badge.base .badge-dot { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+        .plan-badge.elite .badge-dot { background: #a855f7; box-shadow: 0 0 8px #a855f7; }
+        .plan-badge.premium .badge-dot { background: #facc15; box-shadow: 0 0 8px #facc15; }
+
+        /* Плашки скидок */
+        .discount-tag { position: absolute; top: -14px; right: 24px; background: linear-gradient(135deg, var(--accent-red), #8B0000); color: white; padding: 6px 14px; border-radius: 12px; font-size: 13px; font-weight: 800; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 20px rgba(255, 12, 12, 0.3); font-family: var(--font-mono); z-index: 10; }
+
+        /* Цена */
         .plan-price { font-size: 48px; font-weight: 800; margin-bottom: 32px; display: flex; align-items: baseline; background: linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0.2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; }
         .plan-price span { font-size: 20px; font-weight: 600; margin-left: 4px; -webkit-text-fill-color: rgba(255,255,255,0.4); }
         
         .plan-features { list-style: none; flex-grow: 1; margin-bottom: 40px; }
         .plan-features li { display: flex; align-items: center; gap: 14px; font-size: 14px; color: #CCCCCC; margin-bottom: 20px; font-weight: 500; }
         
-        /* Иконка галочки */
         .feature-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; min-width: 20px; }
         .feature-icon svg { width: 12px; height: 12px; stroke: #FFFFFF; stroke-width: 3; }
         
-        /* Кнопки тарифов */
         .plan-btn { width: 100%; padding: 18px; border-radius: 50px; text-align: center; text-decoration: none; font-size: 15px; font-weight: 700; transition: all 0.3s ease; display: block; }
-        
         .plan-btn.outline { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #FFFFFF; }
         .plan-btn.outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
-        
         .plan-btn.solid { background: #FFFFFF; color: #000000; border: none; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
         .plan-btn.solid:hover { background: #e0e0e0; transform: scale(1.02); }
 
@@ -194,7 +206,6 @@
             /* Адаптив для тарифов */
             .pricing-section { padding: 40px 20px; }
             .pricing-grid { flex-direction: column; max-width: 450px; margin: 0 auto; }
-            .pricing-bg-text { font-size: 90px; top: 0; letter-spacing: -2px; }
             
             .footer-top { flex-direction: column; gap: 40px; }
             .footer-bottom-text { font-size: 22vw; letter-spacing: -2px; }
@@ -373,13 +384,15 @@
 
         <!-- === НОВЫЙ БЛОК ТАРИФОВ (PRICING) === -->
         <section id="pricing" class="pricing-section">
-            <div class="pricing-bg-text">Pricing</div>
+            <h2 class="pricing-title">Наши цены</h2>
             
             <div class="pricing-grid">
-                <!-- Тариф 1 -->
+                <!-- Тариф 1: База -->
                 <div class="pricing-card">
-                    <div class="plan-subtitle">Тариф Месяц</div>
-                    <div class="plan-price">250₽<span>/м</span></div>
+                    <div class="plan-header">
+                        <div class="plan-badge base"><div class="badge-dot"></div>Тариф База</div>
+                    </div>
+                    <div class="plan-price">250₽<span>/1М</span></div>
                     
                     <ul class="plan-features">
                         <li>
@@ -403,10 +416,13 @@
                     <a href="https://t.me/vpn_avangard_bot" target="_blank" class="plan-btn outline">Выбрать</a>
                 </div>
 
-                <!-- Тариф 2 (Популярный) -->
+                <!-- Тариф 2: Элит -->
                 <div class="pricing-card">
-                    <div class="plan-subtitle">Тариф Полгода</div>
-                    <div class="plan-price">1 275₽<span>/6м</span></div>
+                    <div class="discount-tag">-15%</div>
+                    <div class="plan-header">
+                        <div class="plan-badge elite"><div class="badge-dot"></div>Тариф Элит</div>
+                    </div>
+                    <div class="plan-price">1 275₽<span>/6М</span></div>
                     
                     <ul class="plan-features">
                         <li>
@@ -423,17 +439,20 @@
                         </li>
                         <li>
                             <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                            До 5-ти устройств
+                            До 4-х устройств
                         </li>
                     </ul>
                     
                     <a href="https://t.me/vpn_avangard_bot" target="_blank" class="plan-btn solid">Выбрать</a>
                 </div>
 
-                <!-- Тариф 3 -->
+                <!-- Тариф 3: Премиум -->
                 <div class="pricing-card">
-                    <div class="plan-subtitle">Тариф Год</div>
-                    <div class="plan-price">2400₽<span>/г</span></div>
+                    <div class="discount-tag">-20%</div>
+                    <div class="plan-header">
+                        <div class="plan-badge premium"><div class="badge-dot"></div>Тариф Премиум</div>
+                    </div>
+                    <div class="plan-price">2 400₽<span>/12М</span></div>
                     
                     <ul class="plan-features">
                         <li>
@@ -450,7 +469,7 @@
                         </li>
                         <li>
                             <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                            Максимальная экономия
+                            До 5-ти устройств
                         </li>
                     </ul>
                     
